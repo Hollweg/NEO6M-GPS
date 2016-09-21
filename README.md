@@ -3,7 +3,8 @@
 ## A proposta
 
 Utilização do receptor GPS NEO6MGPS com microcontrolador ATMEGA328 da AVR. </br>
-Para fazer a integração de hardware foi utilizado uma placa Arduino UNO v3, bem como um módulo cartão SD. </br>
+Para fazer a integração de hardware foi utilizado uma placa Arduino UNO v3, bem como um módulo cartão SD. 
+
 A proposta de utilização do módulo GPS NEO6M de única-frequência é a de criar um datalogger, captando todos os dados em formato NMEA recebidos pelo chip, e então 
 fazer uma pós análise dos dados, de forma que seja possível analisar os protocolos GPGSV, e então, estudar a possibilidade do desenvolvimento de um algoritmo de
 correção de posicionamento utilizando dados de simulação ionosférica do INPE.
@@ -12,8 +13,9 @@ correção de posicionamento utilizando dados de simulação ionosférica do INP
 
 O código foi desenvolvido especificamente para a plataforma Arduino, utilizando C++ e uma linguagem baseada em Wiring. </br>
 Entretanto, sendo feitas algumas pequenas modificações de inicalização e configuração de alguns registradores, o projeto pode ser adaptado para outros microcontroladores, de outras fabricantes. </br>
-Ou então, basicamente, fazendo-se as devidas inicializações de hardware, pode-se trocar o compilador para MikroC ou AtmelStudio. </br>
-Vi a necessidade da criação desse código, e da não utilização da biblioteca TinyGPS ou TinyGPS++, pois a mesma em alguns aspectos é um tanto confusa e muito complexa para tarefas simples. </br>
+
+Ou então, basicamente, fazendo-se as devidas inicializações de hardware, pode-se trocar o compilador para MikroC ou AtmelStudio. Vi a necessidade da criação desse código, e da não utilização 
+da biblioteca TinyGPS ou TinyGPS++, pois a mesma em alguns aspectos é um tanto confusa e muito complexa para tarefas simples. </br>
 
 ## Como funciona?
 
@@ -24,7 +26,7 @@ em cima da placa principal, de modo a reduzir problemas de mau contato, distânc
 O módulo SD utiliza comunicação SPI (Serial Peripheral Interface), já o módulo GPS comunicação UART (User Assynchronous Receiver/Transmitter). </br>
 I/O digitais do microcontrolador utilizados no projeto:
 
--. 7: RX (GPS)
+- 7: RX (GPS)
 - 8: TX (GPS)
 - 9: Pino para pular a verificação de cartão SD
 - 10: CS (Chip Select)
@@ -32,10 +34,13 @@ I/O digitais do microcontrolador utilizados no projeto:
 - 12: MISO (Master Input Slave Output)
 - 13: SCK (Standard Clock)
 
-Lembrando que não é necessário desenvolver a placa adicional para integração de hardware, desde que sejam feitas as conexões corretas quanto ao cartão SD (MISO, MOSI, SCK e CS) e ao GPS (RX e TX). </br>
-O cartão SD é alimentado com 3.3V, entretanto, caso utilize-se um módulo, provavelmente ele tenha um regulador de tensão linear na entrada, permitindo a alimentação em 5V. </br>
-O módulo GPS pode ser alimentado tanto com 3.3V quanto 5V. Entretanto, o chip NEO6M é EXCLUSIVAMENTE alimentado com 3.3V. </br>
-Caso faça seu próprio hardware, atente-se a esse fato, ou o hardware GPS será danificado. </br>
+Lembrando que não é necessário desenvolver a placa adicional para integração de hardware, desde que sejam feitas as conexões corretas quanto ao cartão SD (MISO, MOSI, SCK e CS) e ao GPS (RX e TX). 
+
+O cartão SD é alimentado com 3.3V, entretanto, caso utilize-se um módulo, provavelmente ele tenha um regulador de tensão linear na entrada, permitindo a alimentação em 5V. 
+
+O módulo GPS pode ser alimentado tanto com 3.3V quanto 5V. Entretanto, o chip NEO6M é EXCLUSIVAMENTE alimentado com 3.3V. Caso faça seu próprio hardware, atente-se a esse fato, 
+ou o hardware GPS será danificado. 
+
 É muito importante que a antena do módulo GPS fique em posição horizontal, garantindo uma melhor recepção do sinal. 
 
 Abaixo, fica uma imagem do hardware montado, com a placa desenvolvida, e os módulos conectados.
@@ -43,11 +48,13 @@ Abaixo, fica uma imagem do hardware montado, com a placa desenvolvida, e os mód
 ![Imgur](http://i.imgur.com/2gs1L0m.jpg)
 
 O arquivo NMEALOG.txt mostra um arquivo de dados adquiridos durante a madrugada de 21/09. </br>
-Para adquirir alguns protocolos mais difícies de serem capturados, como GPGSV, indica-se a aquisição de dados durante a noite, pois a ionosfera está menos ionizada. </br>
+Para adquirir alguns protocolos mais difícies de serem capturados, como GPGSV, indica-se a aquisição de dados durante a noite, pois a ionosfera está menos ionizada. 
+
 Tendo em vista que a sua ionização é a principal causa do erro dos sinais de GPS, a qualidade de dados recebida é maior durante esse período. </br>
 
-Para utilização e filtragem de protocolos, deve-se fazer uma varredura no canal de comunicação UART do GPS apenas por aquelas sentenças de interesse. </br>
-Lembrando que sentenças no formato NMEA começam com $ e tem seu último dado marcado pelo caractere \*.
+Para utilização e filtragem de protocolos, deve-se fazer uma varredura no canal de comunicação UART do GPS apenas por aquelas sentenças de interesse. Lembrando que sentenças no 
+formato NMEA começam com $ e tem seu último dado marcado pelo caractere \*.
+
 Abaixo, deixo um link sobre a descrição das sentenças NMEA-like.
 
 http://www.gpsinformation.org/dale/nmea.htm
@@ -56,11 +63,13 @@ Entretanto, como meu objetivo é apenas o recebimento e armazenagem de todos os 
 
 ## Análise de Dados e criação de um algoritmo para correção do erro ionosférico
 
-Foi pensado no desenvolvimento de um algoritmo capaz de corrigir o erro proporcionado pela ionosfera utilizando um modelo mais elaborado dessa camada. </br>
+Foi pensado no desenvolvimento de um algoritmo capaz de corrigir o erro proporcionado pela ionosfera utilizando um modelo mais elaborado dessa camada. 
+
 Entretanto, as informações recebidas pelas sentenças padrões do protocolo NMEA não foram
-suficientes para estimação da posição dos satélites emissores, bem como acesso ao TIMESTAMP de propagação de dados dos satélites. </br>
+suficientes para estimação da posição dos satélites emissores, bem como acesso ao TIMESTAMP de propagação de dados dos satélites. 
+
 Foi submetido para o evento CCIS 2016 - 4th Conference of Computational Interdisciplinary Sciences, em São José dos Campos, SP, um paper explicando todo o processo de aquisição de dados, e 
-tentativa de criação de um algoritmo capaz de corrigir a precisão de GPS de única frequência. </br>
+tentativa de criação de um algoritmo capaz de corrigir a precisão de GPS de única frequência. 
 
 Logo que o artigo for publicado, deixarei aqui o link com o paper completo.
 
