@@ -21,8 +21,9 @@ Ou então, basicamente, **fazendo-se as devidas inicializações de hardware, po
 A ideia do projeto é fazer um **datalogger das sentenças NMEA recebidas via GPS, utilizando um módulo SD e um Arduino UNO**. </br>
 Portanto, para facilitar as conexões de hardware, cortei uma placa universal, adicionei uns headers, e fiz a soldagem pino a pino, criando uma espécie de **shield adicional, conectado diretamente em cima da placa principal, de modo a reduzir problemas de mau contato, distância entre pinos, e fios excedentes, tornando o sistema plug and play.**
 
-O módulo SD utiliza comunicação SPI (Serial Peripheral Interface), já o módulo GPS comunicação UART (User Assynchronous Receiver/Transmitter). </br>
-I/O digitais do microcontrolador utilizados no projeto:
+O módulo SD utiliza comunicação SPI (Serial Peripheral Interface), já o módulo GPS comunicação UART (User Assynchronous Receiver/Transmitter).
+
+I/Os digitais do microcontrolador utilizadas no projeto:
 
 - 7: RX (GPS)
 - 8: TX (GPS)
@@ -32,7 +33,7 @@ I/O digitais do microcontrolador utilizados no projeto:
 - 12: MISO (Master Input Slave Output)
 - 13: SCK (Standard Clock)
 
-Lembrando que não é necessário desenvolver a placa adicional para integração de hardware, desde que sejam feitas as conexões corretas quanto ao cartão SD (MISO, MOSI, SCK e CS) e ao GPS (RX e TX). 
+Lembrando que **não é necessário desenvolver a placa adicional para integração de hardware**, desde que sejam feitas as **conexões corretas** quanto ao cartão SD (MISO, MOSI, SCK e CS) e ao GPS (RX e TX). 
 
 O cartão SD é alimentado com _3.3V_, entretanto, caso utilize-se um módulo, provavelmente ele tenha um regulador de tensão linear na entrada, permitindo a alimentação em _5V_. 
 
