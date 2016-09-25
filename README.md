@@ -45,31 +45,29 @@ Abaixo, fica uma imagem do hardware montado, com a placa desenvolvida, e os mód
 
 ![Imgur](http://i.imgur.com/2gs1L0m.jpg)
 
-O arquivo NMEALOG.txt mostra um arquivo de dados adquiridos durante a madrugada de 21/09. </br>
-Para adquirir alguns protocolos mais difícies de serem capturados, como GPGSV, indica-se a aquisição de dados durante a noite, pois a ionosfera está menos ionizada. 
+O arquivo _NMEALOG.txt_ mostra um arquivo de dados adquiridos durante a madrugada de 21/09. </br>
+Para adquirir alguns protocolos mais difícies de serem capturados, como _GPGSV_, indica-se a aquisição de dados **durante a noite, pois estima-se que a ionosfera esteja menos ionizada.**
 
-Tendo em vista que a sua ionização é a principal causa do erro dos sinais de GPS, a qualidade de dados recebida é maior durante esse período. </br>
+Tendo em vista que a sua ionização é a principal causa do **erro dos sinais de GPS**, a qualidade de dados recebida é maior durante esse período. </br>
 
-Para utilização e filtragem de protocolos, deve-se fazer uma varredura no canal de comunicação UART do GPS apenas por aquelas sentenças de interesse. Lembrando que sentenças no 
-formato NMEA começam com $ e tem seu último dado marcado pelo caractere \*.
+Para utilização e filtragem de protocolos, deve-se fazer uma varredura no canal de comunicação UART do GPS apenas por aquelas sentenças de interesse. Lembrando que sentenças no formato NMEA começam com $ e tem seu último dado marcado pelo caractere \*.
 
-Abaixo, deixo um link sobre a descrição das sentenças NMEA-like.
+Abaixo, deixo um link sobre a descrição das sentenças **NMEA-like**.
 
 http://www.gpsinformation.org/dale/nmea.htm
 
-Entretanto, como meu objetivo é apenas o recebimento e armazenagem de todos os protocolos recebidos pelo módulo, não foi implementado nada que faça esse descarte de informações desnecessárias. 
+Entretanto, como o objetivo inicial é apenas o recebimento e armazenagem de todos os protocolos recebidos pelo módulo, ainda não foi implementado nada que faça esse descarte de informações desnecessárias. 
 
 ## Análise de Dados e criação de um algoritmo para correção do erro ionosférico
 
-Foi pensado no desenvolvimento de um algoritmo capaz de corrigir o erro proporcionado pela ionosfera utilizando um modelo mais elaborado dessa camada. 
+Foi pensado no desenvolvimento de um algoritmo capaz de **corrigir o erro proporcionado pela ionosfera** utilizando um modelo mais elaborado dessa camada. 
 
-Entretanto, as informações recebidas pelas sentenças padrões do protocolo NMEA não foram
-suficientes para estimação da posição dos satélites emissores, bem como acesso ao TIMESTAMP de propagação de dados dos satélites. 
+**Entretanto, as informações recebidas pelas sentenças padrões do protocolo NMEA não foram
+suficientes para estimação da posição dos satélites emissores, bem como acesso ao TIMESTAMP de propagação de dados dos satélites.**
 
-Foi submetido para o evento CCIS 2016 - 4th Conference of Computational Interdisciplinary Sciences, em São José dos Campos, SP, um paper explicando todo o processo de aquisição de dados, e 
-tentativa de criação de um algoritmo capaz de corrigir a precisão de GPS de única frequência. 
+Foi submetido para o _evento CCIS 2016 - 4th Conference of Computational Interdisciplinary Sciences_, em São José dos Campos, SP, um _paper_ explicando todo o processo de aquisição de dados, e tentativa de criação de um algoritmo capaz de corrigir a precisão de GPSs de única frequência. 
 
-Logo que o artigo for publicado, deixarei aqui o link com o paper completo.
+Logo que o artigo for publicado, deixarei abaixo o link com o paper completo.
 
 
 ## Direitos
