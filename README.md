@@ -51,7 +51,7 @@ Para adquirir alguns protocolos mais difícies de serem capturados, como _GPGSV_
 
 Tendo em vista que a sua ionização é a principal causa do **erro dos sinais de GPS**, a qualidade de dados recebida é maior durante esse período. </br>
 
-Para utilização e filtragem de protocolos, deve-se fazer uma varredura no canal de comunicação UART do GPS apenas por aquelas sentenças de interesse. Lembrando que sentenças no formato NMEA começam com $ e tem seu último dado marcado pelo caractere \*.
+Para utilização e filtragem de protocolos, deve-se **fazer uma varredura no canal de comunicação UART do GPS** apenas por aquelas sentenças de interesse. Lembrando que sentenças no **formato NMEA começam com $ e tem seu último dado marcado pelo caractere \*.**
 
 Abaixo, deixo um link sobre a descrição das sentenças **NMEA-like**.
 
