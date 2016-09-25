@@ -2,26 +2,24 @@
 
 ## A proposta
 
-Utilização do receptor GPS NEO6MGPS com microcontrolador ATMEGA328 da AVR. </br>
+Utilização do receptor GPS **NEO6M com microcontrolador AVR ATMEGA328**. </br>
 Para fazer a integração de hardware foi utilizado uma placa Arduino UNO v3, bem como um módulo cartão SD. 
 
-A proposta de utilização do módulo GPS NEO6M de única-frequência é a de criar um datalogger, captando todos os dados em formato NMEA recebidos pelo chip, e então 
+A proposta de utilização do módulo GPS NEO6M de única-frequência é a de **criar um datalogger, captando todos os dados em formato NMEA recebidos pelo chip, e então 
 fazer uma pós análise dos dados, de forma que seja possível analisar os protocolos GPGSV, e então, estudar a possibilidade do desenvolvimento de um algoritmo de
-correção de posicionamento utilizando dados de simulação ionosférica do INPE.
+correção de posicionamento utilizando dados de simulação ionosférica do INPE.**
 
 ## Utilidade
 
-O código foi desenvolvido especificamente para a plataforma Arduino, utilizando C++ e uma linguagem baseada em Wiring. </br>
-Entretanto, sendo feitas algumas pequenas modificações de inicalização e configuração de alguns registradores, o projeto pode ser adaptado para outros microcontroladores, de outras fabricantes. </br>
+O código foi desenvolvido especificamente para a plataforma Arduino, **utilizando C++ e uma linguagem baseada em Wiring**. </br>
+Entretanto, **sendo feitas algumas pequenas modificações de inicalização e configuração de alguns registradores, o projeto pode ser adaptado para outros microcontroladores**, de outras fabricantes. </br>
 
-Ou então, basicamente, fazendo-se as devidas inicializações de hardware, pode-se trocar o compilador para MikroC ou AtmelStudio. Vi a necessidade da criação desse código, e da não utilização 
-da biblioteca TinyGPS ou TinyGPS++, pois a mesma em alguns aspectos é um tanto confusa e muito complexa para tarefas simples. </br>
+Ou então, basicamente, **fazendo-se as devidas inicializações de hardware, pode-se trocar o compilador para MikroC ou AtmelStudio, conforme desejado**. Vi a necessidade da criação desse código, e da não utilização da biblioteca TinyGPS ou TinyGPS++, pois a mesma em alguns aspectos é um tanto confusa e muito complexa para tarefas simples. </br>
 
 ## Como funciona?
 
-A ideia do projeto é fazer um datalogger das sentenças NMEA recebidas via GPS, utilizando um módulo SD e um Arduino UNO. </br>
-Portanto, para facilitar as conexões de hardware, cortei uma placa universal, adicionei uns headers, e fiz a soldagem pino a pino, criando uma espécie de shield adicional, conectado diretamente 
-em cima da placa principal, de modo a reduzir problemas de mau contato, distância entre pinos, e fios excedentes, tornando o sistema plug and play.
+A ideia do projeto é fazer um **datalogger das sentenças NMEA recebidas via GPS, utilizando um módulo SD e um Arduino UNO**. </br>
+Portanto, para facilitar as conexões de hardware, cortei uma placa universal, adicionei uns headers, e fiz a soldagem pino a pino, criando uma espécie de **shield adicional, conectado diretamente em cima da placa principal, de modo a reduzir problemas de mau contato, distância entre pinos, e fios excedentes, tornando o sistema plug and play.**
 
 O módulo SD utiliza comunicação SPI (Serial Peripheral Interface), já o módulo GPS comunicação UART (User Assynchronous Receiver/Transmitter). </br>
 I/O digitais do microcontrolador utilizados no projeto:
@@ -36,12 +34,12 @@ I/O digitais do microcontrolador utilizados no projeto:
 
 Lembrando que não é necessário desenvolver a placa adicional para integração de hardware, desde que sejam feitas as conexões corretas quanto ao cartão SD (MISO, MOSI, SCK e CS) e ao GPS (RX e TX). 
 
-O cartão SD é alimentado com 3.3V, entretanto, caso utilize-se um módulo, provavelmente ele tenha um regulador de tensão linear na entrada, permitindo a alimentação em 5V. 
+O cartão SD é alimentado com _3.3V_, entretanto, caso utilize-se um módulo, provavelmente ele tenha um regulador de tensão linear na entrada, permitindo a alimentação em _5V_. 
 
-O módulo GPS pode ser alimentado tanto com 3.3V quanto 5V. Entretanto, o chip NEO6M é EXCLUSIVAMENTE alimentado com 3.3V. Caso faça seu próprio hardware, atente-se a esse fato, 
-ou o hardware GPS será danificado. 
+O módulo GPS pode ser alimentado tanto com _3V3 quanto 5V_. Entretanto, o chip NEO6M é **EXCLUSIVAMENTE** alimentado com 3.3V. 
+Caso faça seu próprio hardware, atente-se a esse fato, ou o hardware GPS será **danificado**. 
 
-É muito importante que a antena do módulo GPS fique em posição horizontal, garantindo uma melhor recepção do sinal. 
+**É muito importante que a antena do módulo GPS fique em posição horizontal, garantindo uma melhor recepção do sinal.**
 
 Abaixo, fica uma imagem do hardware montado, com a placa desenvolvida, e os módulos conectados.
 
