@@ -1,80 +1,78 @@
 # NEO6M-GPS
 
-## A proposta
+##The Purpose
 
-Utilização do receptor GPS **NEO6M com microcontrolador AVR ATMEGA328**. </br>
-Para fazer a integração de hardware foi utilizado uma placa Arduino UNO v3, bem como um módulo cartão SD. 
+Using the GPS receiver with **NEO6M ATMEGA328 AVR microcontroller.** </br>
+To make the hardware integration it was used an Arduino UNO v3 board as well as an SD card module.
 
-A proposta de utilização do módulo GPS NEO6M de única-frequência é a de **criar um datalogger, captando todos os dados em formato NMEA recebidos pelo chip, e então 
-fazer uma pós análise dos dados, de forma que seja possível analisar os protocolos GPGSV, e então, estudar a possibilidade do desenvolvimento de um algoritmo de
-correção de posicionamento utilizando dados de simulação ionosférica do INPE.**
+The proposed use of a single-frequency NEO6M GPS module is to **create a datalogger, capturing all data in NMEA format received by the chip and then make a post analysis of the data.** </br>
+So it would be possivle to **analyze the GPGSV and other protocols of interest, even study the possibility of developing a positioning correction algorithm using INPE ionospheric simulation model.**
 
-## Utilidade
+##Utility
 
-O código foi desenvolvido especificamente para a plataforma Arduino, **utilizando C++ e uma linguagem baseada em Wiring**. </br>
-Entretanto, **sendo feitas algumas pequenas modificações de inicalização e configuração de alguns registradores, o projeto pode ser adaptado para outros microcontroladores**, de outras fabricantes. </br>
+The code was developed specifically for the Arduino platform **using C++ and a language based on Wiring.** </br>
+However, with **some minor modifications in initilization and configuration of some registers, the design can be adapted to other microcontrollers from other manufacturers.** </br>
+Or, basically, **making the necessary hardware settings modifications, you can change the compiler to MikroC or AtmelStudio**, as desired. </br>
+I saw the need to create this algorithm without use of TinyGPS or TinyGPS++ library because they are in some ways a little bit confusing and complex, even for realization of simple tasks.
 
-Ou então, basicamente, **fazendo-se as devidas inicializações de hardware, pode-se trocar o compilador para MikroC ou AtmelStudio, conforme desejado**. Vi a necessidade da criação desse código, e da não utilização da biblioteca TinyGPS ou TinyGPS++, pois a mesma em alguns aspectos é um tanto confusa e muito complexa para tarefas simples. </br>
+##How it works?
 
-## Como funciona?
+The project idea is to build a **datalogger of NMEA sentences received via single-frequency GPS using a SD module and an Arduino UNO.** </br>
+Therefore, to facilitate the hardware connections, **I did cut an universal soldering board, added some headers, and did the welding pin to pin, creating a sort of additional shield, connected directly on the main board in order to reduce bad contact problems, distance between pins, and excess wires, becoming the system plug and play.**
 
-A ideia do projeto é fazer um **datalogger das sentenças NMEA recebidas via GPS, utilizando um módulo SD e um Arduino UNO**. </br>
-Portanto, para facilitar as conexões de hardware, cortei uma placa universal, adicionei uns headers, e fiz a soldagem pino a pino, criando uma espécie de **shield adicional, conectado diretamente em cima da placa principal, de modo a reduzir problemas de mau contato, distância entre pinos, e fios excedentes, tornando o sistema plug and play.**
+The SD module uses SPI communication (Serial Peripheral Interface), since the single-frequency GPS communication module uses UART (User Assynchronous Receiver / Transmitter).
 
-O módulo SD utiliza comunicação SPI (Serial Peripheral Interface), já o módulo GPS comunicação UART (User Assynchronous Receiver/Transmitter).
-
-I/Os digitais do microcontrolador utilizadas no projeto:
+I/O digital microcontroller used in the project:
 
 - 7: RX (GPS)
 - 8: TX (GPS)
-- 9: Pino para pular a verificação de cartão SD
+- 9: Pin to jump of SD card verification
 - 10: CS (Chip Select)
 - 11: MOSI (Master Output Slave Input)
 - 12: MISO (Master Input Slave Output)
 - 13: SCK (Standard Clock)
 
-Lembrando que **não é necessário desenvolver a placa adicional para integração de hardware**, desde que sejam feitas as **conexões corretas** quanto ao cartão SD (MISO, MOSI, SCK e CS) e ao GPS (RX e TX). 
+Remembering that **it is not necessary to develop the additional board for hardware integration**, since it is correct connections for SD card (MISO, MOSI, SCK and CS) and GPS (RX and TX).
 
-O cartão SD é alimentado com _3.3V_, entretanto, caso utilize-se um módulo, provavelmente ele tenha um regulador de tensão linear na entrada, permitindo a alimentação em _5V_. 
+The SD card is supplied with 3.3V, however, if you use it a module, it probably has a linear voltage regulator at the entrance, allowing the power in 5V.
 
-O módulo GPS pode ser alimentado tanto com _3V3 quanto 5V_. Entretanto, o chip NEO6M é **EXCLUSIVAMENTE** alimentado com 3.3V. 
-Caso faça seu próprio hardware, atente-se a esse fato, ou o hardware GPS será **danificado**. 
+The GPS module can be powered with either 3V3 as 5V. However, the NEO6M chip is **EXCLUSIVELY** fed with 3.3V. If you make your own hardware, be careful with this fact, or the GPS hardware will be **damaged**.
 
-**É muito importante que a antena do módulo GPS fique em posição horizontal, garantindo uma melhor recepção do sinal.**
+**It is very important that the GPS module antenna is in an horizontal position, ensuring a better signal reception.**
 
-Abaixo, fica uma imagem do hardware montado, com a placa desenvolvida, e os módulos conectados.
+Below is a picture of the assembled hardware, with the developed plate and connected modules.
 
 ![Imgur](http://i.imgur.com/2gs1L0m.jpg)
 
-O arquivo _NMEALOG.txt_ mostra um arquivo de dados adquiridos durante a madrugada de 21/09. </br>
-Para adquirir alguns protocolos mais difícies de serem capturados, como _GPGSV_, indica-se a aquisição de dados **durante a noite, pois estima-se que a ionosfera esteja menos ionizada.**
+The NMEALOG.txt file shows a data file acquired during the night of 21/09. </br>
+To get some most difficult protocol to be captured, as GPGSV, I recommend data acquisition **during night because it is estimated that the ionosphere layer is less ionized.** </br>
+Given that **its ionization is the main cause of single-frequency GPS error, the received data quality is higher during this period.**
 
-Tendo em vista que a sua ionização é a principal causa do **erro dos sinais de GPS**, a qualidade de dados recebida é maior durante esse período. </br>
+To develop a protocol filtering, you should do a **scan in GPS UART communication channel only for those sentences of interest.** </br>
+**Recalling that sentences in NMEA format begin with $ and have its last data marked by the character \*. **
 
-Para utilização e filtragem de protocolos, deve-se **fazer uma varredura no canal de comunicação UART do GPS** apenas por aquelas sentenças de interesse. Lembrando que sentenças no **formato NMEA começam com $ e tem seu último dado marcado pelo caractere \*.**
-
-Abaixo, deixo um link sobre a descrição das sentenças **NMEA-like**.
+Below it is a link with **NMEA-like sentences detailed description**.
 
 http://www.gpsinformation.org/dale/nmea.htm
 
-Entretanto, como o objetivo inicial é apenas o recebimento e armazenagem de todos os protocolos recebidos pelo módulo, ainda não foi implementado nada que faça esse descarte de informações desnecessárias. 
+However, as the initial goal is just the receipt and storage of all protocols received by the module, has not yet been implemented nothing to make this disposal of unnecessary information.
 
-## Análise de Dados e criação de um algoritmo para correção do erro ionosférico
+##Data analysis and development of an ionosphere correction algorithm
 
-Foi pensado no desenvolvimento de um algoritmo capaz de **corrigir o erro proporcionado pela ionosfera** utilizando um modelo mais elaborado dessa camada. 
+It was thought in the **development of a system capable of correcting the error provided by the ionosphere algorithm using a more elaborate form of this layer.** </br>
+**We know about Bent and Klobuchar ionosphere correction algorithms, but we planned to develop a more efficient one.**
 
-**Entretanto, as informações recebidas pelas sentenças padrões do protocolo NMEA não foram
-suficientes para estimação da posição dos satélites emissores, bem como acesso ao TIMESTAMP de propagação de dados dos satélites.**
+**However, information received by NMEA protocol standard sentences were not sufficient to estimate the position of the emitting satellites, as well as we do not have access to raw data and satellite data propagation TIMESTAMP.**
 
-Foi submetido para o _evento CCIS 2016 - 4th Conference of Computational Interdisciplinary Sciences_, em São José dos Campos, SP, um _paper_ explicando todo o processo de aquisição de dados, e tentativa de criação de um algoritmo capaz de corrigir a precisão de GPSs de única frequência. 
+The result of this research was submitted as a paper to the event CCIS 2016 - 4th Conference of Computational Interdisciplinary Sciences_, in São José dos Campos, SP. In the paper it is explained all process of acquisition data, and the try to develop an algorithm capable of correct ionospheric delay using NEO6M single-frequency GPS module. </br>
 
-Logo que o artigo for publicado, deixarei abaixo o link com o paper completo.
+As soon as the paper is published I'll let the link to it here. :)
 
 
 ## Direitos
 
-**O projeto pode ser reproduzido sem problema algum.** </br>
-Entretanto, caso isso seja feito, apenas peço para manterem/referenciarem **créditos ao autor**.
+**The project can be reproduced without any problems.**
+However, I only ask you to **keep author credits.** :)
 
 Enjoy!
 
