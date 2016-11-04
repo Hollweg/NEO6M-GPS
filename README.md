@@ -2,7 +2,7 @@
 
 ##The Purpose
 
-Using the GPS receiver with **NEO6M ATMEGA328 AVR microcontroller.** </br>
+Using the GPS receiver with **NEO6M ATMEGA328 AVR microcontroller** and in the future develop a correction algorithm to **reduce single-frequency GPS receiver error.** </br>
 It was used an Arduino UNO v3 board as well as an SD card module together with NEO6M GPS for harware integration.
 
 The proposed use of a single-frequency NEO6M GPS module is to **create a datalogger, capture all data in NMEA format received by the chip and then make a data post analysis.**
@@ -14,7 +14,8 @@ So, it would be possible to **analyze the GPGSV and other protocols of interest 
 The code was developed specifically for Arduino platform **using C++ and a language based on Wiring.** </br>
 However, with **some minor modifications in registers initialization and configuration, the design can be adapted to other microcontrollers fromdifferent manufacturers.** 
 
-Or, basically, **making the necessary hardware settings modifications, you can change the compiler to MikroC or AtmelStudio (or other)**, as desired. </br>
+Or, basically, **making the necessary hardware settings modifications, you can change the compiler to MikroC or AtmelStudio (or other)**, as desired. 
+
 I saw the importance to create this algorithm without use of TinyGPS or TinyGPS++ library because they are in some way a little bit confusing and complex, even for realization of simple tasks.
 
 ##How it works?
@@ -48,11 +49,9 @@ Below is a picture of the assembled hardware, with the developed plate and conne
 ![Imgur](http://i.imgur.com/2gs1L0m.jpg)
 
 The NMEALOG.txt file shows a data file acquired during night of 21/09. </br>
-To get some most difficult protocol to be captured, as GPGSV, I recommend data acquisition **during night (because it is estimated that the ionosphere layer is less ionized and the signal quality will be better)** </br>
-Given that **its ionization is the main cause of single-frequency GPS error, the received data quality is higher during this period.**
+To get some of most difficult protocol to be captured, as GPGSV, I recommend data acquisition **during night (because it is estimated that the ionosphere layer is less ionized and the signal quality will be better).**Given that **its ionization is the main cause of single-frequency GPS error, the received data quality is higher during this period.**
 
-To develop a protocol filtering you should do a **scan in GPS UART communication channel only for those sentences of interest.** </br>
-**Recalling that sentences in NMEA format begin with $ and have its last data marked by the character \*.**
+To develop a protocol filtering you should do a **scan in GPS UART communication channel only for those sentences of interest.Recalling that sentences in NMEA format begin with $ and have its last data marked by the character \*.**
 
 Below it is a link with **NMEA-like sentences detailed description**.
 
@@ -62,8 +61,9 @@ However, as the initial goal is just the receipt and storage of all protocols re
 
 ##Data analysis and development of an ionosphere correction algorithm
 
-It was thought in the **development of an algorithm capable of correcting the error provided by the ionosphere layer using a more elaborate estimation of this layer.** </br>
-**We know about Bent and Klobuchar ionosphere correction algorithms contributions, but our main ideia is to develop a more efficient one.**
+It was thought in the **development of an algorithm capable of correcting the error provided by the ionosphere layer using a more elaborate estimation of this layer.**
+
+**We studied Bent and Klobuchar ionosphere correction algorithms contributions, but our main ideia is to develop a more efficient one.**
 
 **However, information received by NMEA protocol standard sentences were not sufficient to estimate the position of the emitting satellites, as well as we do not have access to sattelite raw data (and consequently we do not access the real TIMESTAMP) we cannot proceed with the project idea with this hardware. To contour this problem we plan to acquire a better single-frequency GPS hardware (superior NEO6M models) that allows raw data manipulation.**
 
