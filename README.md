@@ -44,7 +44,7 @@ The GPS module can be powered with either 3V3 as 5V. However, the NEO6M chip is 
 
 **It is very important that the GPS module antenna is in an horizontal position, ensuring a better signal reception.**
 
-Below is a picture of the assembled hardware, with the developed plate and connected modules.
+*Below there is a picture of the assembled hardware, with the developed plate and connected modules:*
 
 ![Imgur](http://i.imgur.com/2gs1L0m.jpg)
 
