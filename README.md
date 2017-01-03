@@ -71,6 +71,10 @@ This research was developed in CRS-INPE submitted as a paper to the event _CCIS 
 
 As soon as the paper is published I'll let the link to it here.
 
+You can see the paper published on the following link:
+
+http://www.epacis.net/ccis2016/en/index.php
+
 ##Acknowledgment
 
 I would like to thanks my friends and research colleagues in INPE: Fernando E. Puntel, Telmo S. Klipp e Adriano Petry for the help provided during this work.
@@ -83,5 +87,6 @@ However, I only ask you to **keep author credits.** :)
 
 Enjoy!
 
-Hollweg
+
+**Hollweg**
 
