@@ -69,6 +69,9 @@ suficientes para estimação da posição dos satélites emissores, bem como ace
 Foi submetido para o _evento CCIS 2016 - 4th Conference of Computational Interdisciplinary Sciences_, em São José dos Campos, SP, um _paper_ explicando todo o processo de aquisição de dados, e tentativa de criação de um algoritmo capaz de corrigir a precisão de GPSs de única frequência. 
 
 Logo que o artigo for publicado, deixarei abaixo o link com o paper completo.
+Você já pode ver a versão completa do paper no link:
+
+http://www.epacis.net/ccis2016/en/index.php 
 
 
 ##Direitos
