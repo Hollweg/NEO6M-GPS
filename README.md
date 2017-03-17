@@ -1,6 +1,6 @@
-#NEO6M-GPS
+# NEO6M-GPS
 
-##The Purpose
+## The Purpose
 
 Using the GPS receiver with **NEO6M ATMEGA328 AVR microcontroller** and in the future develop a correction algorithm to **reduce single-frequency GPS receiver error.** </br>
 It was used an Arduino UNO v3 board as well as an SD card module together with NEO6M GPS for harware integration.
@@ -9,7 +9,7 @@ The proposed use of a single-frequency NEO6M GPS module is to **create a datalog
 
 So, it would be possible to **analyze the GPGSV and other protocols of interest (NMEA like sentences), even study the possibility of developing a positioning correction algorithm using INPE ionospheric simulation model.**
 
-##Utility
+## Utility
 
 The code was developed specifically for Arduino platform **using C++ and a language based on Wiring.** </br>
 However, with **some minor modifications in registers initialization and configuration, the design can be adapted to other microcontrollers fromdifferent manufacturers.** 
@@ -18,7 +18,7 @@ Or, basically, **making the necessary hardware settings modifications, you can c
 
 I saw the importance to create this algorithm without use of TinyGPS or TinyGPS++ library because they are in some way a little bit confusing and complex, even for realization of simple tasks.
 
-##How it works?
+## How it works?
 
 The project idea is to build a **datalogger of received NMEA sentences via single-frequency GPS using a SD module and an Arduino UNO.** </br>
 
@@ -59,7 +59,7 @@ http://www.gpsinformation.org/dale/nmea.htm
 
 However, as the initial goal is just the receipt and storage of all protocols received by the module, has not yet been implemented nothing to make this disposal of unnecessary information.
 
-##Data analysis and development of an ionosphere correction algorithm
+## Data analysis and development of an ionosphere correction algorithm
 
 It was thought in the **development of an algorithm capable of correcting the error provided by the ionosphere layer using a more elaborate estimation of this layer.**
 
@@ -75,11 +75,11 @@ You can see the paper published on the following link:
 
 http://www.epacis.net/ccis2016/en/index.php
 
-##Acknowledgment
+## Acknowledgment
 
 I would like to thanks my friends and research colleagues in INPE: Fernando E. Puntel, Telmo S. Klipp e Adriano Petry for the help provided during this work.
 
-##Copyrights
+## Copyrights
 
 **The project is open source and can be reproduced without any problems.**
 However, I only ask you to **keep author credits.** :)

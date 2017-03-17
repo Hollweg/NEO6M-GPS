@@ -1,6 +1,6 @@
-#NEO6M-GPS
+# NEO6M-GPS
 
-##A proposta
+## A proposta
 
 Utilização do receptor GPS **NEO6M com microcontrolador AVR ATMEGA328**. </br>
 Para fazer a integração de hardware foi utilizado uma placa Arduino UNO v3, bem como um módulo cartão SD. 
@@ -9,14 +9,14 @@ A proposta de utilização do módulo GPS NEO6M de única-frequência é a de **
 fazer uma pós análise dos dados, de forma que seja possível analisar os protocolos GPGSV, e então, estudar a possibilidade do desenvolvimento de um algoritmo de
 correção de posicionamento utilizando dados de simulação ionosférica do INPE.**
 
-##Utilidade
+## Utilidade
 
 O código foi desenvolvido especificamente para a plataforma Arduino, **utilizando C++ e uma linguagem baseada em Wiring**. </br>
 Entretanto, **sendo feitas algumas pequenas modificações de inicalização e configuração de alguns registradores, o projeto pode ser adaptado para outros microcontroladores**, de outras fabricantes. </br>
 
 Ou então, basicamente, **fazendo-se as devidas inicializações de hardware, pode-se trocar o compilador para MikroC ou AtmelStudio, conforme desejado**. Vi a necessidade da criação desse código, e da não utilização da biblioteca TinyGPS ou TinyGPS++, pois a mesma em alguns aspectos é um tanto confusa e muito complexa para tarefas simples. </br>
 
-##Como funciona?
+## Como funciona?
 
 A ideia do projeto é fazer um **datalogger das sentenças NMEA recebidas via GPS, utilizando um módulo SD e um Arduino UNO**. </br>
 Portanto, para facilitar as conexões de hardware, cortei uma placa universal, adicionei uns headers, e fiz a soldagem pino a pino, criando uma espécie de **shield adicional, conectado diretamente em cima da placa principal, de modo a reduzir problemas de mau contato, distância entre pinos, e fios excedentes, tornando o sistema plug and play.**
@@ -74,7 +74,7 @@ Você já pode ver a versão completa do paper no link:
 http://www.epacis.net/ccis2016/en/index.php 
 
 
-##Direitos
+## Direitos
 
 **O projeto pode ser reproduzido sem problema algum.** </br>
 Entretanto, caso isso seja feito, apenas peço para manterem/referenciarem **créditos ao autor**.
